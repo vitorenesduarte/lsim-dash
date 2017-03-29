@@ -1,174 +1,25 @@
 <head>
-  <title>lsim dashboard</title>
+    <title>lsim dashboard</title>
 </head>
 
-<body class="hold-transition fixed skin-black">
-  {{> all}}
+<template name="main">
+  <body class="hold-transition fixed skin-black">
+    <div class="wrapper">
+
+        {{> header }}
+        {{> sidebar }}
+
+        <div class="content-wrapper">
+
+            <section class="content">
+
+                {{> yield }}
+
+            </section>
+        </div>
+
+        {{> footer}}
+
+    </div>
 </body>
-
-<template name="all">
-<div class="wrapper">
-
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="lsim.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>lsim</b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>lsim</b> dashboard</span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header">DEPLOYMENTS</li>
-        <li>
-          <a href="lsim.html">
-            <i class="fa fa-spinner"></i> <span>On Going</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-blue">3</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="done.html">
-            <i class="fa fa-check"></i> <span>Done</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">4</small>
-            </span>
-          </a>
-        </li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-
-    <!-- Main content -->
-    <section class="content">
-      <!-- Info boxes -->
-      <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-light-blue"><i class="fa fa-spinner"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">On Going</span>
-              <span class="info-box-number">3</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Done</span>
-              <span class="info-box-number">4</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-      </div>
-
-      <!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-        <div class="col-md-12">
-          <!-- TABLE: Deployments -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Deployments</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="table-responsive">
-                <table class="table no-margin">
-                  <thead>
-                  <tr>
-                    <th>Timestamp</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Number</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">123456788</a></td>
-                    <td>rsg</td>
-                    <td><span class="label label-success">Running</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">1</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">123456788</a></td>
-                    <td>lsim</td>
-                    <td><span class="label label-warning">ContainerCreating</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">64</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">123456789</a></td>
-                    <td>rsg</td>
-                    <td><span class="label label-primary">Terminating</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">1</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">123456789</a></td>
-                    <td>lsim</td>
-                    <td><span class="label label-danger">Error</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">256</div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.table-responsive -->
-            </div>
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <strong>Thanks to <a href="https://almsaeedstudio.com/themes/AdminLTE/" target="_blank">AdminLTE</a>!</strong>
-  </footer>
-
-</div>
 </template>
