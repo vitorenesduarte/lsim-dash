@@ -20,3 +20,5 @@ shell-server@0.2.3            # Server-side component of the `meteor shell` comm
 twbs:bootstrap
 fortawesome:fontawesome
 jquery
+iron:router
+rochal:slimscroll
