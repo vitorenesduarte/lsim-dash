@@ -5,7 +5,6 @@ before_install:
   - export PATH="$HOME/.meteor:$PATH"
 script:
   - meteor build $HOME/build.tgz
-  - meteor lint
 notifications:
   slack: haslab:jhAnACJzswFtYwKXpbZzjbFq
   email: false
