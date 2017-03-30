@@ -2,7 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import redis from 'redis';
 import async from 'async';
 
-const REDIS_INTERVAL = 5000;
+const REDIS_INTERVAL = 10; // seconds
 const REDIS_CONFIG = redisConfig();
 
 Meteor.startup(() => {
@@ -71,6 +71,6 @@ function scheduleRedisPull() {
 
             }));
         },
-        REDIS_INTERVAL
+        REDIS_INTERVAL * 1000
     );
 }
