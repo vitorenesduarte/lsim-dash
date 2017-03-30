@@ -8,11 +8,13 @@ Meteor.publish('done', function () {
 
 Meteor.methods({
     'done.insert'(key, value){
+        check(key, String);
+        check(value, Object);
+
         const timestamp = key.split("/")[0];
-        console.log(timestamp, value);
         Done.upsert(
             {timestamp: timestamp},
-            {$set: {a: 10}}
+            {$set: value}
         )
     }
 });

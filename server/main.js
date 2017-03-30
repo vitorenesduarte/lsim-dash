@@ -60,7 +60,7 @@ function scheduleRedisPull() {
                         } else {
                             for (var i = 0; i < result.length; i++) {
                                 const key = result[i]['key'];
-                                const value = result[i]['key'];
+                                const value = JSON.parse(result[i]['value']);
                                 Meteor.call('done.insert', key, value)
                             }
                         }

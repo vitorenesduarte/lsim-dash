@@ -33,11 +33,11 @@
                             {{#each done}}
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">{{timestamp}}</a></td>
-                                    <td>state-based</td>
-                                    <td>ring</td>
-                                    <td>gset</td>
+                                    <td>{{ldb_mode}}</td>
+                                    <td>{{lsim_overlay}}</td>
+                                    <td>{{lsim_simulation}}</td>
                                     <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">1</div>
+                                        <div class="sparkbar" data-color="#00a65a" data-height="20">{{lsim_node_number}}</div>
                                     </td>
                                 </tr>
                             {{/each}}

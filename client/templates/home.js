@@ -3,9 +3,9 @@ import {Template} from 'meteor/templating';
 import './home.html';
 
 Template.Home.events({
-    'click .e-going'(event) {
+    'click .e-running'(event) {
         event.preventDefault();
-        Router.go("going");
+        Router.go("running");
     },
     'click .e-done'(event) {
         event.preventDefault();
