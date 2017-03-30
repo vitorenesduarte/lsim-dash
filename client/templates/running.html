@@ -29,8 +29,16 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {{#each running}}
                             <tr>
-                                <td><a href="pages/examples/invoice.html">123456788</a></td>
+                                <td><a href="#">{{timestamp}}</a></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{runningReplicas}}/{{desiredReplicas}}</td>
+                            </tr>
+                            {{/each}}
+                            <tr>
+                                <td><a href="#">123456788</a></td>
                                 <td>rsg</td>
                                 <td><span class="label label-success">Running</span></td>
                                 <td>
