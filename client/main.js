@@ -8,7 +8,3 @@ Template.Main.onRendered(function () {
     // hack to position the footer
     $(window).trigger('resize');
 });
-
-Template.Main.events({});
-
-Template.Main.helpers({});
