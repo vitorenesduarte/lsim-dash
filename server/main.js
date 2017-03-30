@@ -28,16 +28,20 @@ function redisConfig() {
 function scheduleRedisPull() {
     Meteor.setInterval(
         function () {
-            var client = redis.createClient(REDIS_CONFIG);
+            // create redis client
+            const client = redis.createClient(REDIS_CONFIG);
 
-            client.keys("*", Meteor.bindEnvironment(function (err, keys) {
+            // only fetch rsg logs for now
+            const pattern = "*rsg*";
+
+            client.keys(pattern, Meteor.bindEnvironment(function (err, keys) {
                 if (err) {
                     console.log("Error fetching keys from Redis:", err);
                 } else {
                     var calls = [];
 
                     for (var i = 0; i < keys.length; i++) {
-                        var key = keys[i];
+                        const key = keys[i];
 
                         calls.push(function (callback) {
                             client.get(key, function (err, value) {
@@ -53,12 +57,14 @@ function scheduleRedisPull() {
                     async.parallel(calls, Meteor.bindEnvironment(function (err, result) {
                         if (err) {
                             console.log("Error fetching value from Redis:", err);
+                        } else {
+                            for (var i = 0; i < result.length; i++) {
+                                const key = result[i]['key'];
+                                const value = result[i]['key'];
+                                Meteor.call('done.insert', key, value)
+                            }
                         }
 
-                        for (var i = 0; i < result.length; i++) {
-                            var m = result[i];
-                            Meteor.call('done.insert', {timestamp: m['key']})
-                        }
                         client.quit();
                     }));
                 }

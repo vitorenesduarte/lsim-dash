@@ -1,5 +1,4 @@
 import {Meteor} from 'meteor/meteor';
-import {check} from 'meteor/check';
 
 import {Done} from '../../lib/collections';
 
@@ -8,12 +7,12 @@ Meteor.publish('done', function () {
 });
 
 Meteor.methods({
-    'done.insert'(data){
-        check(data.timestamp, String);
-
+    'done.insert'(key, value){
+        const timestamp = key.split("/")[0];
+        console.log(timestamp, value);
         Done.upsert(
-            {timestamp: data.timestamp},
-            {$set: data}
+            {timestamp: timestamp},
+            {$set: {a: 10}}
         )
     }
 });
