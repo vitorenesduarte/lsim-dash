@@ -7,14 +7,13 @@ Meteor.publish('done', function () {
 });
 
 Meteor.methods({
-    'done.insert'(key, value){
-        check(key, String);
-        check(value, Object);
+    'done.insert'(timestamp, data){
+        check(timestamp, String);
+        check(data, Object);
 
-        const timestamp = key.split("/")[0];
         Done.upsert(
             {timestamp: timestamp},
-            {$set: value}
+            {$set: data}
         )
     }
 });

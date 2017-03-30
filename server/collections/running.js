@@ -7,6 +7,16 @@ Meteor.publish('running', function () {
 });
 
 Meteor.methods({
-    'running.insert'(){
-    }
+    'running.insert'(timestamp, data){
+        check(timestamp, String);
+        check(data, Object);
+
+        Running.upsert(
+            {timestamp: timestamp},
+            {$set: data}
+        )
+    },
+    'running.clear'() {
+        Running.remove({});
+    },
 });
