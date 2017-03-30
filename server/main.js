@@ -34,8 +34,6 @@ function scheduleRedisPull() {
                 if (err) {
                     console.log("Error fetching keys from Redis:", err);
                 } else {
-                    console.log("KEYS from Redis:", keys);
-
                     var calls = [];
 
                     for (var i = 0; i < keys.length; i++) {
