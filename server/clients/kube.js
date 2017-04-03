@@ -35,7 +35,7 @@ class KubeClient {
                     const name = item.metadata.name;
                     const timestamp = name.split("-")[1];
 
-                    if (name.includes('lsim')) {
+                    if (name.includes('lsim') && !name.includes('lsim-dash')) {
                         options = self._getOptions('/api/v1/pods?labelSelector=tag%3Dlsim,timestamp%3D' + timestamp)
 
                         request(options, Meteor.bindEnvironment(function (err, response, body) {
