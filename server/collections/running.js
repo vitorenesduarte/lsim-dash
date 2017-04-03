@@ -16,7 +16,7 @@ Meteor.methods({
             {$set: data}
         )
     },
-    'running.clear'() {
+    'running.remove'() {
         Running.remove({});
     },
 });
