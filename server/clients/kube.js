@@ -36,7 +36,7 @@ class KubeClient {
                     const timestamp = name.split("-")[1];
 
                     if (name.includes('lsim')) {
-                        options = self._getOptions('/api/v1/pods?labelSelector=timestamp%3D' + timestamp)
+                        options = self._getOptions('/api/v1/pods?labelSelector=tag%3Dlsim,timestamp%3D' + timestamp)
 
                         request(options, Meteor.bindEnvironment(function (err, response, body) {
                             if (err) {
@@ -44,16 +44,35 @@ class KubeClient {
                             } else {
                                 value = JSON.parse(body);
 
+                                var lsims = [];
+                                var statuz = {};
+
                                 for (var i = 0; i < value.items.length; i++) {
                                     const item = value.items[i];
                                     console.log(item);
-                                    const name = item.metadata.name;
-                                    delete item.metadata.labels['pod-template-hash'];
-                                    const labels = item.metadata.labels;
+
+                                    // add status to set of status
                                     const status = item.status.phase;
+                                    statuz[status] = true;
+
+                                    // save pod name and ip
+                                    const name = item.metadata.name;
                                     const podIP = item.status.podIP;
-                                    console.log(name, labels, status, podIP)
+                                    lsims.push({
+                                        name: name,
+                                        ip: podIP
+                                    });
                                 }
+
+                                const data = {
+                                    timestamp: timestamp,
+                                    statuz : statuz.keys(),
+                                    number : lsims.length
+                                }
+
+                                Meteor.call('running.insert', timestamp, data);
+
+                                console.log(lsims);
                             }
                         }));
                     }
