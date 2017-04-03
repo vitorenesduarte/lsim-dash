@@ -24,3 +24,4 @@ iron:router
 rochal:slimscroll
 session
 check
+peerlibrary:assert
