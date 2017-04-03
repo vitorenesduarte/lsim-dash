@@ -24,8 +24,15 @@ function scheduleRedisPull() {
     Meteor.setInterval(
         function () {
             const REDIS_CONFIG = KUBE_CLI.redisConfig();
-            const REDIS_CLI = new RedisClient(REDIS_CONFIG);
-            REDIS_CLI.fetchMetrics();
+            if (REDIS_CONFIG) {
+                // if defined, use it
+                const REDIS_CLI = new RedisClient(REDIS_CONFIG);
+                REDIS_CLI.fetchMetrics();
+            }
+            else {
+                // otherwise, try to fetch it again
+                KUBE_CLI.loadRedisConfig();
+            }
         },
         REDIS_INTERVAL * 1000
     );

@@ -12,7 +12,7 @@ class KubeClient {
 
         this._host = host;
         this._token = token;
-        this._fetchRedisConfig();
+        this.loadRedisConfig();
     }
 
     redisConfig() {
@@ -62,16 +62,7 @@ class KubeClient {
         }));
     }
 
-    _getOptions(url) {
-        return {
-            url: this._host + url,
-            headers: {
-                Authorization: 'Bearer ' + this._token
-            }
-        }
-    }
-
-    _fetchRedisConfig() {
+    loadRedisConfig() {
         const self = this;
         const options = self._getOptions('/api/v1/pods?labelSelector=tag%3Dredis')
 
@@ -87,12 +78,19 @@ class KubeClient {
                 const podIP = item.status.podIP;
 
                 self._redisConfig = {
-                    // @todo
-                    //host: podIP,
-                    host: '127.0.0.1',
+                    host: podIP,
                     port: 6379
                 }
             }
         });
+    }
+
+    _getOptions(url) {
+        return {
+            url: this._host + url,
+            headers: {
+                Authorization: 'Bearer ' + this._token
+            }
+        }
     }
 }
