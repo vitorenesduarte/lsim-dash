@@ -51,7 +51,8 @@ class KubeClient {
                                     delete item.metadata.labels['pod-template-hash'];
                                     const labels = item.metadata.labels;
                                     const status = item.status.phase;
-                                    console.log(name, labels, status)
+                                    const podIP = item.status.podIP;
+                                    console.log(name, labels, status, podIP)
                                 }
                             }
                         }));
