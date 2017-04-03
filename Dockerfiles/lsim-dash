@@ -1,0 +1,9 @@
+FROM node:7.8
+
+MAINTAINER Vitor Enes Duarte <vitorenesduarte@gmail.com>
+
+COPY bundle/ /bundle
+
+WORKDIR /bundle
+
+RUN (cd programs/server && npm install)
