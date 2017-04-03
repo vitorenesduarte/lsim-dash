@@ -1,0 +1,7 @@
+FROM node:7.8-slim
+
+MAINTAINER Vitor Enes Duarte <vitoreenesduarte@gmail.com>
+
+RUN apt-get update && \
+    apt-get install -y git && \
+    curl https://install.meteor.com/ | sh
