@@ -10,4 +10,4 @@ ENV METEOR_ALLOW_SUPERUSER true
 
 RUN meteor npm install
 
-CMD meteor
+CMD git pull && meteor
