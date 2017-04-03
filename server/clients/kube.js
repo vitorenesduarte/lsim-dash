@@ -68,7 +68,9 @@ class KubeClient {
                                     timestamp: timestamp,
                                     statuz : Object.keys(statuz),
                                     number : lsims.length
-                                }
+                                };
+
+                                console.log(data);
 
                                 Meteor.call('running.insert', timestamp, data);
 
