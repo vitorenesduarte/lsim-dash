@@ -66,7 +66,7 @@ class KubeClient {
 
                                 const data = {
                                     timestamp: timestamp,
-                                    statuz : statuz.keys(),
+                                    statuz : Object.keys(statuz),
                                     number : lsims.length
                                 }
 
