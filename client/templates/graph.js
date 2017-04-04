@@ -13,7 +13,7 @@ Template.Graph.onRendered(function () {
 
     for (var i = 0; i < nodes.length; i++) {
 
-        const node = nodes[i];
+        const node = nodes[i].split(':').join('.');
         const neighbors = graph[node];
 
         console.log('nn', node, neighbors);
