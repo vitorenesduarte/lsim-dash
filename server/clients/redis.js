@@ -1,6 +1,8 @@
 import redis from 'redis';
 import async from 'async';
 
+export {RedisClient};
+
 class RedisClient {
     constructor(config) {
         check(config, Object);
@@ -27,7 +29,7 @@ class RedisClient {
                                 return callback(err);
                             }
 
-                            callback(null, {key: key, value: value});
+                            callback(null, {key: key, value: JSON.parse(value)});
                         });
                     });
                 }
@@ -37,9 +39,8 @@ class RedisClient {
                         console.log('Error fetching value from Redis:', err);
                     } else {
                         for (var i = 0; i < result.length; i++) {
-                            const key = result[i]['key'];
-                            const timestamp = key.split("/")[0];
-                            const data = JSON.parse(result[i]['value']);
+                            const timestamp = result[i]['key'].split("/")[0];
+                            const data = result[i]['value'];
                             Meteor.call('done.insert', timestamp, data)
                         }
                     }
@@ -51,5 +52,3 @@ class RedisClient {
         }));
     }
 }
-
-export {RedisClient};

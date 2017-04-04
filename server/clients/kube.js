@@ -1,4 +1,5 @@
 import request from 'request';
+import async from 'async';
 
 export {KubeClient};
 
@@ -49,7 +50,6 @@ class KubeClient {
 
                                 for (var i = 0; i < value.items.length; i++) {
                                     const item = value.items[i];
-                                    console.log(item);
 
                                     // add status to set of status
                                     const status = item.status.phase;
@@ -64,27 +64,49 @@ class KubeClient {
                                     });
                                 }
 
-                                const data = {
-                                    timestamp: timestamp,
-                                    statuz : Object.keys(statuz),
-                                    number : lsims.length
-                                };
+                                var calls = [];
 
-                                console.log(data);
-
-                                Meteor.call('running.insert', timestamp, data);
-
-                                for(var i = 0; i < lsims.length; i++){
+                                for (var i = 0; i < lsims.length; i++) {
                                     const lsim = lsims[i];
-                                    request('http://' + lsim.ip + ':8080/membership', function(err, response, body){
-                                        if(err) {
-                                            console.log('Error fetching membership from ', lsim,  err);
-                                        } else{
-                                            value = JSON.parse(body);
-                                            console.log('membership', body);
-                                        }
+                                    const path = 'http://' + lsim.ip + ':8080/membership';
+
+                                    calls.push(function (callback) {
+                                        request(path, function (err, response, body) {
+                                            if (err) {
+                                                return callback(err);
+                                            } else {
+                                                callback(null, {key: lsim.name, value: JSON.parse(body)});
+                                            }
+                                        });
                                     });
                                 }
+
+                                async.parallel(calls, Meteor.bindEnvironment(function (err, result) {
+                                    if (err) {
+                                        console.log('Error fetching membership from lsims', err);
+                                    } else {
+
+                                        var graph = {};
+
+                                        for (var i = 0; i < result.length; i++) {
+                                            const name = result[i]['key'];
+                                            const membership = result[i]['value'];
+
+                                            graph[name] = membership;
+                                        }
+
+                                        const data = {
+                                            timestamp: timestamp,
+                                            statuz: Object.keys(statuz),
+                                            number: lsims.length,
+                                            graph: graph
+                                        };
+
+                                        console.log(data);
+
+                                        Meteor.call('running.insert', timestamp, data);
+                                    }
+                                }));
                             }
                         }));
                     }
