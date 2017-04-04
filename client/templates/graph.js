@@ -11,12 +11,19 @@ Template.Graph.onRendered(function () {
     var elements = [];
     const nodes = Object.keys(graph);
 
-    for (const node in nodes) {
-        elements.push({data: {id: node}});
-    }
+    for (var i = 0; i < nodes.length; i++) {
 
-    for (const node in nodes) {
-        for (const neighbor in graph[node]) {
+        const node = nodes[i];
+        const neighbors = graph[node];
+
+        console.log(node, neighbors);
+
+        for (var j = 0; j < neighbors.length; j++){
+
+            const neighbor = neighbors[i];
+
+            console.log(neighbor);
+
             elements.push({
                 data: {
                     id: node + neighbor,
