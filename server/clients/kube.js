@@ -75,7 +75,7 @@ class KubeClient {
                                             if (err) {
                                                 return callback(err);
                                             } else {
-                                                callback(null, {key: lsim.name, value: JSON.parse(body)});
+                                                callback(null, {key: lsim.ip, value: JSON.parse(body)});
                                             }
                                         });
                                     });
@@ -89,7 +89,7 @@ class KubeClient {
                                         var graph = {};
 
                                         for (var i = 0; i < result.length; i++) {
-                                            const name = result[i]['key'];
+                                            const name = 'lsim-6866@' + result[i]['key'];
                                             const membership = result[i]['value'];
 
                                             graph[name] = membership;
