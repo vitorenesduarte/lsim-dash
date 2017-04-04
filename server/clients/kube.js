@@ -89,8 +89,8 @@ class KubeClient {
                                         var graph = {};
 
                                         for (var i = 0; i < result.length; i++) {
-                                            const name = 'lsim-6866@' + result[i]['key'].split('.').join(':');
-                                            const membership = result[i]['value'];
+                                            const name = self._undotted('lsim-6866@' + result[i]['key']);
+                                            const membership = result[i]['value'].map(self._undotted);
 
                                             graph[name] = membership;
                                         }
@@ -146,4 +146,9 @@ class KubeClient {
             }
         }
     }
+
+    _undotted(name) {
+        return name.split('.').join('-');
+    }
+
 }
