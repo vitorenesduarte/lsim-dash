@@ -16,6 +16,12 @@ Template.Graph.onRendered(function () {
         const node = nodes[i];
         const neighbors = graph[node];
 
+        elements.push({
+            data: {
+                id: node
+            }
+        });
+
         console.log('nn', node, neighbors);
 
         for (var j = 0; j < neighbors.length; j++){
