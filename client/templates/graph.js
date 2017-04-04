@@ -11,6 +11,9 @@ Template.Graph.onRendered(function () {
 
     for (const node in nodes) {
         elements.push({data: {id: node}});
+    }
+
+    for (const node in nodes) {
         for (const neighbor in graph[node]) {
             elements.push({
                 data: {
@@ -21,6 +24,8 @@ Template.Graph.onRendered(function () {
             });
         }
     }
+
+    console.log(elements);
 
     var cy = cytoscape({
 
