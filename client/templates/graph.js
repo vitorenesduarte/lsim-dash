@@ -4,24 +4,29 @@ import './graph.html';
 import cytoscape from 'cytoscape';
 
 Template.Graph.onRendered(function () {
-    console.log('just rendered', this);
-    console.log('just rendered', this.data.deployment.graph);
+    const graph = this.data.deployment.graph;
+
+    var elements = [];
+    const nodes = Object.keys(graph);
+
+    for (const node in nodes) {
+        elements.push({data: {id: node}});
+        for (const neighbor in graph[node]) {
+            elements.push({
+                data: {
+                    id: node + neighbor,
+                    source: node,
+                    target: neighbor
+                }
+            });
+        }
+    }
 
     var cy = cytoscape({
 
         container: document.getElementById('cy'), // container to render in
 
-        elements: [ // list of graph elements to start with
-            { // node a
-                data: { id: 'a' }
-            },
-            { // node b
-                data: { id: 'b' }
-            },
-            { // edge ab
-                data: { id: 'ab', source: 'a', target: 'b' }
-            }
-        ],
+        elements: elements,
 
         style: [ // the stylesheet for the graph
             {
