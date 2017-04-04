@@ -89,7 +89,7 @@ class KubeClient {
                                         var graph = {};
 
                                         for (var i = 0; i < result.length; i++) {
-                                            const name = 'lsim-6866@' + result[i]['key'].replace('.', ':');
+                                            const name = 'lsim-6866@' + result[i]['key'].split('.').join(':');
                                             const membership = result[i]['value'];
 
                                             graph[name] = membership;
