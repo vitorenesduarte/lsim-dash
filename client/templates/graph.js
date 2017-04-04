@@ -6,6 +6,8 @@ import cytoscape from 'cytoscape';
 Template.Graph.onRendered(function () {
     const graph = this.data.deployment.graph;
 
+    console.log(graph);
+
     var elements = [];
     const nodes = Object.keys(graph);
 
