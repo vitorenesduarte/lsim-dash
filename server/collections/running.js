@@ -6,6 +6,10 @@ Meteor.publish('running', function () {
     return Running.find();
 });
 
+Meteor.publish('graph', function(timestamp){
+   return Running.find({tiemstamp: timestamp});
+});
+
 Meteor.methods({
     'running.insert'(timestamp, data){
         check(timestamp, String);
