@@ -76,7 +76,7 @@ class KubeClient {
 
                                 for(var i = 0; i < lsims.length; i++){
                                     const lsim = lsims[i];
-                                    request(lsim.ip + '/membership', function(err, response, body){
+                                    request('http://' + lsim.ip + '/membership', function(err, response, body){
                                         console.log(lsim, err, response, body);
                                     });
                                 }
