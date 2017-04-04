@@ -77,7 +77,12 @@ class KubeClient {
                                 for(var i = 0; i < lsims.length; i++){
                                     const lsim = lsims[i];
                                     request('http://' + lsim.ip + ':8080/membership', function(err, response, body){
-                                        console.log(lsim, err, response, body);
+                                        if(err) {
+                                            console.log('Error fetching membership from ', lsim,  err);
+                                        } else{
+                                            value = JSON.parse(body);
+                                            console.log('membership', body);
+                                        }
                                     });
                                 }
                             }
