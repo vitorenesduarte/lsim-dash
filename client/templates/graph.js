@@ -5,6 +5,7 @@ import cytoscape from 'cytoscape';
 
 Template.Graph.onRendered(function () {
     console.log('just rendered', this);
+    console.log('just rendered', this.data.deployment.graph);
 
     var cy = cytoscape({
 
