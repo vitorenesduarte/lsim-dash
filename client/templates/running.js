@@ -5,8 +5,6 @@ import './running.html';
 Template.Running.helpers({
     getLabelType(status) {
 
-        console.log('type', status);
-
         if(status == 'Running') {
             return 'label-success';
         }
