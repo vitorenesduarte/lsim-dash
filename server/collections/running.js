@@ -21,6 +21,6 @@ Meteor.methods({
         )
     },
     'running.remove'(timestamps) {
-        Running.remove({timestamps: {$in: timestamps}});
+        Running.remove({timestamps: {$nin: timestamps}});
     },
 });
