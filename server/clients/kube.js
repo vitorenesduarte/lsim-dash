@@ -30,6 +30,8 @@ class KubeClient {
             if (err) {
                 console.log('Error fetching deployments from Kubernetes:', err);
             } else {
+                var timestamps = [];
+
                 var value = JSON.parse(body);
                 for (var i = 0; i < value.items.length; i++) {
                     const item = value.items[i];
@@ -38,6 +40,8 @@ class KubeClient {
 
                     if (name.includes('lsim') && !name.includes('lsim-dash')) {
                         options = self._getOptions('/api/v1/pods?labelSelector=tag%3Dlsim,timestamp%3D' + timestamp)
+
+                        timestamps.push(timestamp);
 
                         request(options, Meteor.bindEnvironment(function (err, response, body) {
                             if (err) {
@@ -112,6 +116,8 @@ class KubeClient {
                     }
                 }
             }
+
+            Meteor.call('running.remove', timestamps);
         }));
     }
 

@@ -20,7 +20,7 @@ Meteor.methods({
             {$set: data}
         )
     },
-    'running.remove'() {
-        Running.remove({});
+    'running.remove'(timestamps) {
+        Running.remove({timestamps: {$in: timestamps}});
     },
 });
