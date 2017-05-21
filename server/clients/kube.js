@@ -118,7 +118,7 @@ class KubeClient {
     loadRedisConfig() {
         const self = this;
         const options = self._getOptions('/api/v1/pods?labelSelector=tag%3Dredis')
-
+        console.log("O: " + options);
         // fetch redis config
         request(options, function (err, response, body) {
             if (err) {
