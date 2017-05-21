@@ -115,9 +115,9 @@ class KubeClient {
                         }));
                     }
                 }
+                // remove all timestamps that were not added now
+                Meteor.call('running.remove', timestamps);
             }
-
-            Meteor.call('running.remove', timestamps);
         }));
     }
 
