@@ -118,14 +118,14 @@ class KubeClient {
     loadRedisConfig() {
         const self = this;
         const options = self._getOptions('/api/v1/pods?labelSelector=tag%3Dredis')
-        console.log("O: " + options);
+        console.log("O: " +  JSON.stringify(options, null, 2));
         // fetch redis config
         request(options, function (err, response, body) {
             if (err) {
                 console.log('Error fetching redis config from Kubernetes:', err);
             } else {
-                console.log("R: " + response);
-                console.log("B: " + body)
+                console.log("R: " +  JSON.stringify(response, null, 2));
+                console.log("B: " +  JSON.stringify(body, null, 2));
                 const value = JSON.parse(body);
                 const items = value.items;
                 assert(items.length == 1);
