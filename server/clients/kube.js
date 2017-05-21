@@ -124,6 +124,8 @@ class KubeClient {
             if (err) {
                 console.log('Error fetching redis config from Kubernetes:', err);
             } else {
+                console.log("R: " + response);
+                console.log("B: " + body)
                 const value = JSON.parse(body);
                 const items = value.items;
                 assert(items.length == 1);
