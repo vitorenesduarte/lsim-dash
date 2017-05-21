@@ -1,12 +1,17 @@
 FROM vitorenesduarte/lsim-dash-base
 
-MAINTAINER Vitor Enes Duarte <vitorenesduarte@gmail.com>
+MAINTAINER Vitor Enes <vitorenesduarte@gmail.com>
 
-RUN git clone https://github.com/vitorenesduarte/lsim-dash.git
 
-WORKDIR lsim-dash
-
+ENV NAME=lsim-dash
+ENV REPO=https://github.com/vitorenesduarte/$NAME.git
 ENV METEOR_ALLOW_SUPERUSER true
+ARG BRANCH
+
+RUN cd /opt && \
+    git clone $REPO -b $BRANCH
+
+WORKDIR /opt/$NAME
 
 RUN meteor npm install
 
