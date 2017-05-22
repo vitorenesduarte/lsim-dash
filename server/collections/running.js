@@ -7,10 +7,16 @@ Meteor.publish('running', function () {
 });
 
 Meteor.publish('graph', function(timestamp){
-   return Running.find({tiemstamp: timestamp});
+   return Running.find({timestamp: timestamp});
 });
 
 Meteor.methods({
+    /**
+     * Insert/Update a running-simulation.
+     *
+     * @param timestamp Simulation timestamp.
+     * @param data      Simulation data.
+     */
     'running.insert'(timestamp, data){
         check(timestamp, String);
         check(data, Object);
@@ -20,7 +26,12 @@ Meteor.methods({
             {$set: data}
         )
     },
+    /**
+     * Remove non-running simulations.
+     *
+     * @param timestamps List of timestamps currently active.
+     */
     'running.remove'(timestamps) {
-        Running.remove({timestamps: {$nin: timestamps}});
+        Running.remove({timestamp: {$nin: timestamps}});
     },
 });

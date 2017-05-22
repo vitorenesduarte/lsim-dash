@@ -7,6 +7,12 @@ Meteor.publish('done', function () {
 });
 
 Meteor.methods({
+    /**
+     * Insert/Update a done-simulation.
+     *
+     * @param timestamp Simulation timestamp.
+     * @param data      Simulation data.
+     */
     'done.insert'(timestamp, data){
         check(timestamp, String);
         check(data, Object);
