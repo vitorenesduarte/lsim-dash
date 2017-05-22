@@ -33,5 +33,7 @@ Meteor.methods({
      */
     'running.remove'(timestamps) {
         Running.remove({timestamp: {$nin: timestamps}});
+
+        console.log(JSON.stringify(Running.find().fetch(), null, 2));
     },
 });
