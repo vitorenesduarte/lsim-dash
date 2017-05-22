@@ -106,8 +106,6 @@ class KubeClient {
                                             graph: graph
                                         };
 
-                                        console.log(data);
-
                                         Meteor.call('running.insert', timestamp, data);
                                     }
                                 }));
@@ -115,6 +113,7 @@ class KubeClient {
                         }));
                     }
                 }
+
                 // remove all timestamps that were not added now
                 Meteor.call('running.remove', timestamps);
             }
