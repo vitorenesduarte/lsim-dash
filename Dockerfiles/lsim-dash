@@ -8,11 +8,10 @@ ENV REPO=https://github.com/vitorenesduarte/$NAME.git
 ENV METEOR_ALLOW_SUPERUSER true
 ARG BRANCH
 
-RUN cd /opt && \
-    git clone $REPO -b $BRANCH
+WORKDIR /opt
+RUN git clone $REPO -b $BRANCH
 
 WORKDIR /opt/$NAME
-
 RUN meteor npm install
 
 CMD git pull && meteor
